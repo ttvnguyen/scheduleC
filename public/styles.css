@@ -1,0 +1,32 @@
+body {
+    background: url('shoping-cart.jpg') no-repeat center center/ cover;
+    height: 100vh;
+    position: relative;
+}
+header {
+    margin-bottom: 2em;
+  }
+  header ul {
+    margin: 0;
+    display: flex;
+    align-items: center;
+  }
+  header li {
+    font-family: 'Montserrat', helvetica;
+    font-weight: 700;
+    font-size: 0.8em;
+    margin-left: 1em;
+    text-transform: uppercase;
+  }
+  header li a {
+    color: black;
+  }
+  ul {
+    display: flex;
+    flex-direction: row;
+  }
+  li {
+    display: flex;
+    flex-direction: column;
+  }
+  

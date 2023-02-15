@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head.ejs') %>
+<%- include('./partials/header.ejs') %>
+
+<body>
+    <div class="container">
+        <p>Date: <%=transaction.date%></p>
+        <p>Descriptions: <%=transaction.description%></p>
+        <p>Category: <%=transaction.category%></p>
+        <p>Amount: <%=transaction.amount%></p>
+        <p>Note: <%=transaction.amount%></p>
+
+    </div>
+    <%- include ('./partials/footer.ejs') %>
+</body>
+</html>
