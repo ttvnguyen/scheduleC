@@ -22,6 +22,25 @@ router.get('/', (req, res) => {
       }
     })
   })
+
+//NEW route for new transaction
+router.get('/new', (req, res) => {
+  console.log(`In NEW route: ${req.body}`)
+  res.render('new.ejs')
+})
+
+//POST route for creating a new transaction
+router.post('/', (req, res) => {
+  console.log(req.body)
+  Transaction.create(req.body, (err, createdTransaction) => {
+    if(err){
+      console.log(err)
+      res.send(err)
+    } else {
+      res.redirect('/transactions')
+    }
+  })
+})
   
 //Transaction SHOW route
 router.get('/:id', (req, res) => {
@@ -38,8 +57,7 @@ router.get('/:id', (req, res) => {
       }
     })
   })
-
-
+  
 //Use this route to init some expense transactions
 router.get('/seed', async (req, res) => {
     const newTransactions =

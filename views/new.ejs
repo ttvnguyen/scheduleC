@@ -5,6 +5,19 @@
 
 <body>
     <div class="container">
+        <form action="/transactions" method = "POST">
+            <label for="date">Date</label>
+            <input type="date" name="date"><br>
+            <label for="description">Description</label>
+            <input type="text" name="description" size="60"><br>
+            <label for="category">Category</label>
+            <%- include('category.ejs') %><br>
+            <label for="amount">Amount</label>
+            <input type="text" name="amount" id="amount" ><br>
+            <label for="note">Note</label>
+            <input type="text" name="note" id="note" ><br>
+            <input type="submit" value="Create Transaction">
+        </form>
 
     </div>
     <%- include ('./partials/footer.ejs') %>
