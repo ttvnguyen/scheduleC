@@ -1,6 +1,7 @@
 const express = require('express')
 const Transaction = require('../models/transactions.js')
 const router = express.Router()
+const moment = require('moment')
 
 //Test router calling route
 // router.get('/', (req, res) =>{
@@ -71,14 +72,24 @@ router.get('/:id/edit', (req, res) => {
     if(err){
       console.log(err, ' - ERROR AT TRANSACTION EDIT ROUTE')
     } else {
+      console.log(`transaction : ${moment(foundTransaction.date).format('MM/DD/YYYY')}`)
       res.render('edit.ejs', {
         transaction: foundTransaction,
+        trdate:moment(foundTransaction.date).format('YYYY-MM-DD'),
           title: 'EDIT TRANSACTION'
       })
     }
   })
 })
 
+//Create an put route for editing the transaction
+router.put('/:id', (req, res) =>{
+  // res.send(req.body)
+  Transaction.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedProduct)=>{
+    if (err) console.log(err, 'ERROR at PUT ROUTE')
+    res.redirect('/transactions')
+  })
+})
 //Use this route to init some expense transactions
 router.get('/seed', async (req, res) => {
     const newTransactions =

@@ -2,16 +2,19 @@
 <html lang="en">
 <%- include('./partials/head.ejs') %>
 <%- include('./partials/header.ejs') %>
-
 <body>
     <div class="container">
         <form action="/transactions/<%=transaction._id%>?_method=PUT" method = "POST">
             <label for="date">Date</label>
-            <input type="date" name="date" id="date" value="<%=transaction.name%>"><br>
+            <input type="date" name="date" id="date" value="<%=trdate%>"><br>
             <label for="description">Description</label>
             <input type="text" name="description" id="description" value="<%=transaction.description%>" size="40"><br>
             <label for="category">Category</label>
-            <%- include('category.ejs') %><br>
+            <%- include('category.ejs') %> <br>
+            <script>
+                let $selectCat = document.querySelector('#category')
+                $selectCat.value ='<%= transaction.category %>'
+            </script>
             <label for="amount">Amount</label>
             <input type="text" name="amount" id="amount" value="<%=transaction.amount%>"><br>
             <label for="note">Note</label>
