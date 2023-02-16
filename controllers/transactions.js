@@ -41,6 +41,13 @@ router.post('/', (req, res) => {
     }
   })
 })
+
+//Product DELETE route
+router.delete('/:id', (req, res)=>{
+  Transaction.findByIdAndRemove(req.params.id, (err, data)=>{
+    res.redirect('/transactions')
+  })
+})
   
 //Transaction SHOW route
 router.get('/:id', (req, res) => {
@@ -57,7 +64,21 @@ router.get('/:id', (req, res) => {
       }
     })
   })
-  
+
+//Transaction EDIT route
+router.get('/:id/edit', (req, res) => {
+  Transaction.findById(req.params.id, (err, foundTransaction) => {
+    if(err){
+      console.log(err, ' - ERROR AT TRANSACTION EDIT ROUTE')
+    } else {
+      res.render('edit.ejs', {
+        transaction: foundTransaction,
+          title: 'EDIT TRANSACTION'
+      })
+    }
+  })
+})
+
 //Use this route to init some expense transactions
 router.get('/seed', async (req, res) => {
     const newTransactions =
