@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head.ejs') %>
+<%- include('./partials/header.ejs') %>
+<body>
+    <div class="container">
+        <% let sum = {}
+            for (let i=0; i<transactions.length;i++){
+                if(transactions[i].category in sum){
+                    sum[transactions[i].category]+=transactions[i].amount
+                }else{
+                    sum[transactions[i].category]=transactions[i].amount
+                }
+            } %>
+        <table>
+            <tr>
+                <th>Category</th>
+                <th>Total</th>
+            </tr>     
+             <%for (cat in sum){%>
+                <tr>
+                    <th><%=cat%></th>
+                    <th><%=sum[cat]%></th>
+                </tr>
+            <%} %>
+        </table>
+    </div>
+    <%- include ('./partials/footer.ejs') %>
+</body>
+</html>

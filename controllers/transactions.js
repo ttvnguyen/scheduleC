@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
 
 //NEW route for new transaction
 router.get('/new', (req, res) => {
-  console.log(`In NEW route: ${req.body}`)
+  // console.log(`In NEW route: ${req.body}`)
   res.render('new.ejs')
 })
 
@@ -42,8 +42,23 @@ router.post('/', (req, res) => {
     }
   })
 })
+//Transaction Report route
+router.get('/report', (req, res) => {
+  // res.render('index.ejs')
+  Transaction.find((err, transactions) => {
+    if(err){
+      console.log(err, ': ERROR IN REPORT ROUTE QUERY')
+    } else {
+      // console.log(transactions)
+      res.render('report.ejs', {
+          transactions: transactions,
+          pageTitle: 'SUM TRANSACTIONS PER CATEGORY'
+      })
+    }
+  })
+})
 
-//Product DELETE route
+//Transaction DELETE route
 router.delete('/:id', (req, res)=>{
   Transaction.findByIdAndRemove(req.params.id, (err, data)=>{
     res.redirect('/transactions')
@@ -60,6 +75,7 @@ router.get('/:id', (req, res) => {
         console.log(foundTransaction, ': SUCCESS, FOUND TRANSACTION FOR SHOW ROUTE')
         res.render('show.ejs', {
           transaction: foundTransaction,
+          trdate:moment(foundTransaction.date).format('YYYY-MM-DD'),
           pageTitle: 'DISPLAY TRANSACTION'
         })
       }
@@ -72,7 +88,6 @@ router.get('/:id/edit', (req, res) => {
     if(err){
       console.log(err, ' - ERROR AT TRANSACTION EDIT ROUTE')
     } else {
-      console.log(`transaction : ${moment(foundTransaction.date).format('MM/DD/YYYY')}`)
       res.render('edit.ejs', {
         transaction: foundTransaction,
         trdate:moment(foundTransaction.date).format('YYYY-MM-DD'),
@@ -97,49 +112,49 @@ router.get('/seed', async (req, res) => {
         {
             date: 03/12/2022,
             description: 'business card',
-            category : 'advertising',
+            category : 'Advertising',
             amount: 50,
             note: ''
             },
             {
             date: 06/12/2022,
             description: 'paper, pen, pencil',
-            category : 'office supplies',
+            category : 'Office Supplies',
             amount: 50,
             note: ''
             },
             {
             date: 01/12/2022,
             description: 'ads, internet banner',
-            category : 'advertising',
+            category : 'Advertising',
             amount: 500,
             note: ''
             },
             {
             date: 03/12/2022,
             description: 'attorney fee',
-            category : 'legal and professional services',
+            category : 'Legal',
             amount: 50,
             note: ''
             },
             {
             date: 09/12/2022,
             description: 'second phone line',
-            category : 'utilities',
+            category : 'Utilities',
             amount: 50,
             note: '' 
             },
             {
             date: 03/12/2022,
             description: 'postage and shipping',
-            category : 'advertising',
+            category : 'Advertising',
             amount: 50,
             note: ''
             },
             {
             date: 03/12/2022,
             description: 'tax preparation fee',
-            category : 'legal and professional services',
+            category : 'Legal',
             amount: 350,
             note: ''
             }
