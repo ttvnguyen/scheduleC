@@ -4,24 +4,25 @@
 <%- include('./partials/header.ejs') %>
 <body>
     <div class="container" >
-        <table>
+        <script src="table-sort.js"></script>
+        <table class="table-sort">
             <tr>
                 <th>Description</th>
-                <th>Category</th>
+                <th class="order-by-desc">Category</th>
                 <th>Amount</th>
                 <th></th>
                 <th></th>
             </tr>
             <% for (let i=0; i<transactions.length;i++){%>
                 <tr>
-                    <th>
+                    <td>
                         <a href="/transactions/<%= transactions[i]._id %>"><%= transactions[i].description%>&nbsp;</a></th>
-                    <th><%= transactions[i].category%></th>
-                    <th><%= transactions[i].amount%></th>
-                    <th><form action="/transactions/<%= transactions[i]._id%>?_method=DELETE" method="POST">
+                    <td><%= transactions[i].category%></th>
+                    <td><%= transactions[i].amount%></th>
+                    <td><form action="/transactions/<%= transactions[i]._id%>?_method=DELETE" method="POST">
                         <input type="submit" class="fa-solid fa-trash-can" value="&#xf014;" >
                     </form></th>
-                    <th><a href="/transactions/<%= transactions[i]._id %>/edit" class="fa-solid fa-edit"></a></th>
+                    <td><a href="/transactions/<%= transactions[i]._id %>/edit" class="fa-solid fa-edit"></a></th>
                 </tr>
             <%}%>
         </table>

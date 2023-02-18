@@ -4,6 +4,7 @@
 <%- include('./partials/header.ejs') %>
 <body>
     <div class="container">
+        <button onclick="window.print()"><i class="fa fa-print" aria-hidden="true"></i></button>
         <% let sum = {}
             for (let i=0; i<transactions.length;i++){
                 if(transactions[i].category in sum){
@@ -23,6 +24,12 @@
                     <th><%=sum[cat]%></th>
                 </tr>
             <%} %>
+            <tr>
+                <%let total = 0%>
+                <%total = transactions.reduce((sum, obj) => { return sum + parseInt(obj.amount)},0) %>
+                <th>Total Expenses</th>
+                <th><%=total%></th>
+            </tr>
         </table>
     </div>
     <%- include ('./partials/footer.ejs') %>
