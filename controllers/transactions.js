@@ -2,33 +2,41 @@ const express = require('express')
 const Transaction = require('../models/transactions.js')
 const router = express.Router()
 const moment = require('moment')
-
+const isAuthenticated = require('../utils/middleware.js')
 
 //Test router calling route
 // router.get('/', (req, res) =>{
 //     res.send('This is the transactions controller')
 // })
 
+router.use(isAuthenticated)
+console.log(`User can access: ${isAuthenticated}`)
+
 //Transaction index route
 router.get('/', (req, res) => {
     // res.render('index.ejs')
-    Transaction.find((err, transactions) => {
+    Transaction.find({username: 'vnguyen9'},(err, transactions) => {
+      console.log(`Any transactions: ${transactions}`)
       if(err){
         console.log(err, ': ERROR IN INDEX ROUTE QUERY')
       } else {
         // console.log(transactions)
         res.render('index.ejs', {
-            transactions: transactions,
-            pageTitle: 'ALL TRANSACTIONS'
+          transactions: transactions,
+          currentUser: req.session.currentUser,
+          pageTitle: 'ALL TRANSACTIONS'
         })
       }
     })
   })
 
 //NEW route for new transaction
-router.get('/new', (req, res) => {
+router.get('/new', isAuthenticated,(req, res) => {
   // console.log(`In NEW route: ${req.body}`)
-  res.render('new.ejs')
+  res.render('new.ejs',{
+    currentUser: req.session.currentUser
+  })
+  
 })
 
 //POST route for creating a new transaction
@@ -53,6 +61,7 @@ router.get('/report', (req, res) => {
       // console.log(transactions)
       res.render('report.ejs', {
           transactions: transactions,
+          currentUser: req.session.currentUser,
           pageTitle: 'SUM TRANSACTIONS PER CATEGORY'
       })
     }

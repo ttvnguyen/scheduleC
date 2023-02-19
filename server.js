@@ -7,8 +7,12 @@ const mongoose = require ('mongoose');
 const app = express ();
 const db = mongoose.connection;
 const transactionsController = require('./controllers/transactions.js')
+const userController = require('./controllers/users.js')
+const session = require('express-session')
+const sessionsController = require('./controllers/sessions.js')
 
 require('dotenv').config()
+
 //___________________
 //Port
 //___________________
@@ -47,17 +51,28 @@ app.use(express.json());// returns middleware that only parses JSON - may or may
 //use method override
 app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 
-//use controller
+//use session
+app.use(
+  session({
+    secret: process.env.SECRET, //a random string do not copy this value or your stuff will get hacked
+    resave: false, // default more info: https://www.npmjs.com/package/express-session#resave
+    saveUninitialized: false // default  more info: https://www.npmjs.com/package/express-session#resave
+  })
+)
+
+//use controllers
 app.use('/transactions', transactionsController)
+app.use('/users', userController)
+app.use('/sessions', sessionsController)
 
 //___________________
 // Routes
 //___________________
 //localhost:3000
 app.get('/' , (req, res) => {
-  res.send('Hello World!');
-});
-
+  // res.send('Schedule C- Expense Transactions')
+  res.render('users/new.ejs')
+})
 
 
 //___________________
