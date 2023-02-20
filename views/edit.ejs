@@ -5,6 +5,8 @@
 <body>
     <div class="container">
         <form action="/transactions/<%=transaction._id%>?_method=PUT" method = "POST">
+            <label for="username"></label>
+            <input type="hidden" name="username" value="<%=currentUser.username%>" >
             <label for="date">Date</label>
             <input type="date" name="date" id="date" value="<%=trdate%>"><br>
             <label for="description">Description</label>

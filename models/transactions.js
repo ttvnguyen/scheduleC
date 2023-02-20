@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const transactionSchema = new Schema({
+    username:String,
     date: {type : Date , required: true},
     description: {type : String , required: true},
     category: String,

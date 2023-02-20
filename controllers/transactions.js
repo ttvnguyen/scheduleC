@@ -15,8 +15,9 @@ console.log(`User can access: ${isAuthenticated}`)
 //Transaction index route
 router.get('/', (req, res) => {
     // res.render('index.ejs')
-    Transaction.find({username: 'vnguyen9'},(err, transactions) => {
-      console.log(`Any transactions: ${transactions}`)
+    console.log(`User Name: ${req.session.currentUser.username}`)
+    Transaction.find({username: req.session.currentUser.username},(err, transactions) => {
+      // console.log(`Any transactions: ${transactions}`)
       if(err){
         console.log(err, ': ERROR IN INDEX ROUTE QUERY')
       } else {
@@ -32,7 +33,7 @@ router.get('/', (req, res) => {
 
 //NEW route for new transaction
 router.get('/new', isAuthenticated,(req, res) => {
-  // console.log(`In NEW route: ${req.body}`)
+  console.log(`In NEW route: ${req.session.currentUser.username}`)
   res.render('new.ejs',{
     currentUser: req.session.currentUser
   })
@@ -54,7 +55,7 @@ router.post('/', (req, res) => {
 //Transaction Report route
 router.get('/report', (req, res) => {
   // res.render('index.ejs')
-  Transaction.find((err, transactions) => {
+  Transaction.find({username: req.session.currentUser.username},(err, transactions) => {
     if(err){
       console.log(err, ': ERROR IN REPORT ROUTE QUERY')
     } else {
@@ -100,6 +101,7 @@ router.get('/:id/edit', (req, res) => {
     } else {
       res.render('edit.ejs', {
         transaction: foundTransaction,
+        currentUser: req.session.currentUser,
         trdate:moment(foundTransaction.date).format('YYYY-MM-DD'),
           title: 'EDIT TRANSACTION'
       })
@@ -120,6 +122,7 @@ router.get('/seed', async (req, res) => {
     const newTransactions =
       [
         {
+          username:'vnguyen',
             date: 03/12/2022,
             description: 'business card',
             category : 'Advertising',
@@ -127,6 +130,7 @@ router.get('/seed', async (req, res) => {
             note: ''
             },
             {
+            username:'vnguyen',
             date: 06/12/2022,
             description: 'paper, pen, pencil',
             category : 'Office Supplies',
@@ -134,6 +138,7 @@ router.get('/seed', async (req, res) => {
             note: ''
             },
             {
+            username:'vnguyen',
             date: 01/12/2022,
             description: 'ads, internet banner',
             category : 'Advertising',
@@ -141,6 +146,7 @@ router.get('/seed', async (req, res) => {
             note: ''
             },
             {
+            username:'vnguyen',
             date: 03/12/2022,
             description: 'attorney fee',
             category : 'Legal',
@@ -148,6 +154,7 @@ router.get('/seed', async (req, res) => {
             note: ''
             },
             {
+            username:'vnguyen',
             date: 09/12/2022,
             description: 'second phone line',
             category : 'Utilities',
@@ -155,6 +162,7 @@ router.get('/seed', async (req, res) => {
             note: '' 
             },
             {
+            username:'vnguyen',
             date: 03/12/2022,
             description: 'postage and shipping',
             category : 'Advertising',
@@ -162,6 +170,7 @@ router.get('/seed', async (req, res) => {
             note: ''
             },
             {
+            username:'vnguyen',
             date: 03/12/2022,
             description: 'tax preparation fee',
             category : 'Legal',
