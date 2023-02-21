@@ -25,6 +25,10 @@
                 </tr>
             <%} %>
             <tr>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
                 <%let total = 0%>
                 <%total = transactions.reduce((sum, obj) => { return sum + parseInt(obj.amount)},0) %>
                 <th>Total Expenses</th>

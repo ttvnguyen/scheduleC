@@ -35,7 +35,8 @@ router.get('/', (req, res) => {
 router.get('/new', isAuthenticated,(req, res) => {
   console.log(`In NEW route: ${req.session.currentUser.username}`)
   res.render('new.ejs',{
-    currentUser: req.session.currentUser
+    currentUser: req.session.currentUser,
+    todayDate:moment(Date.now()).format('YYYY-MM-DD')
   })
   
 })
