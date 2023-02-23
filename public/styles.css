@@ -29,7 +29,10 @@ header {
     display: flex;
     flex-direction: column;
   }
-  table, th, tr {
+  table, th, tr, td {
     border:1px solid black;
    }
+  h4 {
+    text-align: center;
+  }
   

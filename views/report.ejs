@@ -2,9 +2,10 @@
 <html lang="en">
 <%- include('./partials/head.ejs') %>
 <%- include('./partials/header.ejs') %>
+<%- include('./partials/nav.ejs') %>
 <body>
     <div class="container">
-        <button onclick="window.print()"><i class="fa fa-print" aria-hidden="true"></i></button>
+        <button onclick="window.print()" title="PRINT"><i class="fa fa-print" aria-hidden="true"></i></button>
         <% let sum = {}
             for (let i=0; i<transactions.length;i++){
                 if(transactions[i].category in sum){
