@@ -10,7 +10,7 @@ const isAuthenticated = require('../utils/middleware.js')
 // })
 
 router.use(isAuthenticated)
-console.log(`User can access: ${isAuthenticated}`)
+// console.log(`User can access: ${isAuthenticated}`)
 
 //Transaction index route
 router.get('/', (req, res) => {

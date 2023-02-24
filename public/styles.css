@@ -35,4 +35,11 @@ header {
   h4 {
     text-align: center;
   }
+
+  .but-sol{
+    background-color: grey;
+    text-align: center;
+    color: beige;
+
+  }
   

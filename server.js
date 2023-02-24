@@ -71,10 +71,10 @@ app.use('/sessions', sessionsController)
 //localhost:3000
 app.get('/' , (req, res) => {
   // res.send('Schedule C- Expense Transactions')
-  res.render('home.ejs')
+  res.render('home.ejs',{
+    currentUser: req.session.currentUser
+  })
 })
-
-
 
 //___________________
 //Listener
